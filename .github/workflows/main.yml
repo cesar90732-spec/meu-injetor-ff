@@ -1,29 +1,32 @@
-name: Build Injetor APK
+name: Gerar Injetor APK
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Código
-        uses: actions/checkout@v3
+      - name: Checkout do Codigo
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Instalar Java 17
+        uses: actions/setup-java@v4
         with:
-          node-version: '18'
+          distribution: 'temurin'
+          java-version: '17'
 
-      - name: Instalar Cordova
-        run: npm install -g cordova
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
 
-      - name: Adicionar Plataforma Android
+      - name: Instalar Cordova e Build
         run: |
+          npm install -g cordova
           cordova platform add android
-          
-      - name: Build APK (Debug)
-        run: cordova build android --packageType=apk
+          cordova build android --packageType=apk
 
-      - name: Salvar APK Gerado
-        uses: actions/upload-artifact@v3
+      - name: Enviar APK para Download
+        uses: actions/upload-artifact@v4
         with:
-          name: Injetor-Instalavel
+          name: meu-injetor-final
           path: platforms/android/app/build/outputs/apk/debug/app-debug.apk
