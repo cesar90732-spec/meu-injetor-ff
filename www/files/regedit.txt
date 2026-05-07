@@ -1,0 +1,6 @@
+# IA_CORE_V9_SENSITIVITY
+set_sensi_y=2.8
+set_sensi_x=1.5
+aim_lock_head=1
+auto_headshot_ratio=95
+touch_response_ms=0
